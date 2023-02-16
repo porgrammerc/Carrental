@@ -74,15 +74,27 @@ namespace CarRental.Services
             var car = _carRepository.GetCar(id);
             var model = new CarVM
             {
-                Id = x.Id,
-                Brand = x.Brand,
-                Model = x.Model,
-                Photo = x.Photo,
-                Price = x.Price,
-                Color = x.Color,
+                Id = car.Id,
+                Brand = car.Brand,
+                Model = car.Model,
+                Photo = car.Photo,
+                Price = car.Price,
+                Color = car.Color,
             };
 
             return model;
+        }
+
+        public void UpdateCar(CarVM model)
+        {
+            var car = _carRepository.GetCar(model.Id);
+            car.Brand = model.Brand;
+            car.Model = model.Model;
+            car.Photo = model.Photo;
+            car.Price = model.Price;
+            car.Color = model.Color;
+
+            _carRepository.UpdateCar(car);
         }
     }
 }

@@ -1,0 +1,56 @@
+﻿@model CarRental.ViewModels.Car.CarVM
+
+@{
+    ViewData["Title"] = "Edytuj auto";
+}
+
+
+<div class="col-md-12">
+    <div class="row offset-md-3 col-md-6 register-form">
+        <div class="col-md-12">
+            <form asp-action="Update">
+                <input hidden asp-for="Id"/>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row col-md-12 header">
+                    <span>Edytuj auto</span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Brand" class="control-label"></label>
+                    <input asp-for="Brand" class="form-control" />
+                    <span asp-validation-for="Brand" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Model" class="control-label"></label>
+                    <input asp-for="Model" class="form-control" />
+                    <span asp-validation-for="Model" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Color" class="control-label"></label>
+                    <input asp-for="Color" class="form-control" />
+                    <span asp-validation-for="Color" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Photo" class="control-label"></label>
+                    <input asp-for="Photo" class="form-control" />
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+                <div class="row col-md-12" style="margin-top:15px;">
+                    <div class="form-group col-md-4">
+                        <input type="submit" value="Edytuj" class="btn btn-primary" /><br />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

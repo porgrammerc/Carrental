@@ -33,5 +33,11 @@ namespace CarRental.Repositories
         {
             return _context.Cars.FirstOrDefault(x => x.Id == id);
         }
+
+        public void UpdateCar(Car car)
+        {
+            _context.Cars.Update(car);
+            _context.SaveChanges();
+        }
     }
 }

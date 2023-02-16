@@ -1,9 +1,12 @@
-﻿using CarRental.Services.Interfaces;
+﻿using CarRental.Models;
+using CarRental.Services.Interfaces;
 using CarRental.ViewModels.Car;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.Controllers
 {
+    [Authorize(Roles = $"{nameof(Role.Admin)}")]
     public class CarController : Controller
     {
         private readonly ICarService _carService;
@@ -25,6 +28,7 @@ namespace CarRental.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [AllowAnonymous]
         public IActionResult Get(Guid id)
         {
             var car = _carService.GetCar(id);
@@ -41,6 +45,13 @@ namespace CarRental.Controllers
         {
             var car = _carService.GetCarBasicData(id);
             return View(car);
+        }
+
+        [HttpPost]
+        public IActionResult Update(CarVM viewModel)
+        {
+            _carService.UpdateCar(viewModel);
+            return RedirectToAction("Get", new { id = viewModel.Id });
         }
     }
 }

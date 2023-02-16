@@ -28,7 +28,7 @@
                             <a id="manage" class="nav-link text-dark" title="Manage">Witaj @UserManager.GetUserName(User)!</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="Account/Logout">Wyloguj</a>
+                            @Html.ActionLink("Wyloguj","Logout","Account",null,new { @class = "nav-link text-dark"})
                         </li>
                     }
                     else

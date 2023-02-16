@@ -9,5 +9,6 @@ namespace CarRental.Services.Interfaces
         ViewCarVM GetCar(Guid id);
         void DeleteCar(Guid id);
         CarVM GetCarBasicData(Guid id);
+        void UpdateCar(CarVM model);
     }
 }

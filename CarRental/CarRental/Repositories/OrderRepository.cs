@@ -10,6 +10,13 @@ namespace CarRental.Repositories
         {
             _context = context;
         }
+
+        public void CreateOrder(Order order)
+        {
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+        }
+
         public IEnumerable<Order> GetOrdersByCar(Guid id)
         {
             return _context.Orders.Where(x => x.CarId == id);
