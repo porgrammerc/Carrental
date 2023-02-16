@@ -6,6 +6,6 @@ namespace CarRental.Services.Interfaces
     {
         IEnumerable<OrderVM> GetOrdersByCar(Guid id);
         void CreateOrder(CreateOrderVM model, Guid userId);
-        IEnumerable<> GetUserOrders(Guid id);
+        IEnumerable<UserOrderVM> GetUserOrders(Guid id);
     }
 }

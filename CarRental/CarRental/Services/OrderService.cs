@@ -41,5 +41,9 @@ namespace CarRental.Services
             }
              
         }
+        public IEnumerable<UserOrderVM> GetUserOrders(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
