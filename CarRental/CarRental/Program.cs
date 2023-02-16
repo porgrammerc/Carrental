@@ -1,4 +1,8 @@
 using CarRental.Models;
+using CarRental.Repositories;
+using CarRental.Repositories.Interfaces;
+using CarRental.Services;
+using CarRental.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +14,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
                             .AddRoles<IdentityRole<Guid>>()
                             .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddTransient<ICarService, CarService>();
+builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<ICarRepository, CarRepository>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -29,6 +39,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",

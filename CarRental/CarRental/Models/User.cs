@@ -8,4 +8,10 @@ namespace CarRental.Models
         public string LastName { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
+
+    public enum Role
+    {
+        User,
+        Admin
+    }
 }

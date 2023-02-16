@@ -1,0 +1,47 @@
+﻿@model CarRental.ViewModels.Account.LoginVM
+@{
+    ViewData["Title"] = "Logowanie";
+}
+<div class="col-md-12">
+    <form asp-action="Login" class="form-panel">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row offset-md-3 col-md-6">
+            <div class="col-md-2 tab">
+                Rejestracja
+            </div>
+            <div class="col-md-2 tab active">
+                Logowanie
+            </div>
+        </div>
+        <div class="row offset-md-3 col-md-6 register-form">
+            <div class="row col-md-12 header">
+                <span>Zaloguj się</span>
+            </div>
+            <div class="row col-md-12">
+                <div class="form-group">
+                    <label asp-for="Email" class="form-text"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <div class="form-group">
+                    <label asp-for="Password" class="form-text"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row col-md-12" style="margin-top:15px;">
+                <div class="form-group col-md-2">
+                    <input type="submit" value="Dalej" class="btn btn-outline-dark" /><br />
+                </div>
+            </div>
+        </div>        
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

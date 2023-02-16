@@ -1,0 +1,88 @@
+﻿@model CarRental.ViewModels.Car.ViewCarVM
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<div class="col-md-12">
+    <div class="row offset-md-3 col-md-6">
+        <div class="row">
+            <img src="@Model.Photo" class="car-view-photo" />
+        </div>
+        <div class="row" style="margin-top:15px;">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Brand" class="control-label"></label>
+                    <input asp-for="Brand" class="form-control" disabled="disabled" />
+                    <span asp-validation-for="Brand" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Model" class="control-label"></label>
+                    <input asp-for="Model" class="form-control" disabled="disabled" />
+                    <span asp-validation-for="Model" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" disabled="disabled" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Color" class="control-label"></label>
+                    <input asp-for="Color" class="form-control" disabled="disabled" />
+                    <span asp-validation-for="Color" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="row col-md-12" style="margin-top:15px;">
+                <div class="col-md-4">
+                    @Html.ActionLink("Usuń","Delete","Car",new { id = Model.Id },new { @class = "btn btn-danger", @type = "button"})
+                </div>
+                <div class="col-md-4">
+                    @Html.ActionLink("Edytuj","Update","Car",new { id = Model.Id },new { @class = "btn btn-primary", @type = "button"})
+                </div>
+            </div>
+        }
+        <div class="row" style="margin-top:15px;">
+            <div class="row col-md-12 header">
+                <span>Wypożyczenia</span>
+            </div>
+            <div class="row col-md-12">
+                @if (Model.Orders != null && Model.Orders.Count() > 0)
+                {
+                    foreach (var order in Model.Orders)
+                    {
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <span>@order.Name</span>
+                            </div>
+                            <div class="col-md-3">
+                                <span>@order.LastName</span>
+                            </div>
+                            <div class="col-md-3">
+                                <span>@order.StartDate.ToString("dd/MM/yyyy")</span>
+                            </div>
+                            <div class="col-md-3">
+                                <span>@order.EndDate.ToString("dd/MM/yyyy")</span>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div style="text-align: center">
+                        Brak wypożyczeń
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

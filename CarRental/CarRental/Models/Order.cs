@@ -10,5 +10,7 @@ namespace CarRental.Models
         public virtual User User { get; set; }
         public Guid CarId { get; set; }
         public virtual Car Car { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }
