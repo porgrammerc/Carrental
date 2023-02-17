@@ -42,7 +42,7 @@ namespace CarRental.Services
                     Color = car.Color,
                     Photo = car.Photo,
                     Price = car.Price,
-                    Orders = _orderService.GetOrdersByCar(id)
+                    Orders = _orderService.GetOrdersByCar(id).ToList()
                 };
 
                 return model;

@@ -12,7 +12,7 @@ namespace CarRental.ViewModels.Car
         [Display(Name = "Model")]
         public string Model { get; set; }
         [Required(ErrorMessage = "Cena jest wymagana")]
-        [Display(Name = "Cena zł/h")]
+        [Display(Name = "Cena zł/dzień")]
         public double Price { get; set; }
         [Required(ErrorMessage = "Kolor jest wymagany")]
         [Display(Name = "Kolor")]

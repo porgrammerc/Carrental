@@ -1,5 +1,90 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model CarRental.ViewModels.Order.CreateOrderVM
+
+<div class="col-md-12">
+    <div class="row offset-md-3 col-md-6 register-form">
+        <div class="col-md-12">
+            <form asp-action="Create">
+                <input hidden asp-for="Car.Id"/>
+                <input hidden asp-for="Car.Brand"/>
+                <input hidden asp-for="Car.Model"/>
+                <input hidden asp-for="Car.Price"/>
+                <input hidden asp-for="Car.Photo"/>
+                <input hidden asp-for="Car.Color"/>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row col-md-12 header">
+                    <span>Składanie rezerwacji</span>
+                </div>
+                <div class="row">
+                    <img src="@Model.Car.Photo" class="car-view-photo" />
+                </div>
+                <div class="row" style="margin-top:15px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="StartDate" class="control-label"></label>
+                            <input asp-for="StartDate" class="form-control" type="date" id="startDate"/>
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="EndDate" class="control-label"></label>
+                            <input asp-for="EndDate" class="form-control" type="date" id="endDate" />
+                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:15px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Car.Brand" class="control-label"></label>
+                            <input asp-for="Car.Brand" class="form-control" disabled="disabled" />
+                            <span asp-validation-for="Car.Brand" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Car.Model" class="control-label"></label>
+                            <input asp-for="Car.Model" class="form-control" disabled="disabled" />
+                            <span asp-validation-for="Car.Model" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:15px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Car.Price" class="control-label"></label>
+                            <input asp-for="Car.Price" class="form-control" disabled="disabled" />
+                            <span asp-validation-for="Car.Price" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Car.Color" class="control-label"></label>
+                            <input asp-for="Car.Color" class="form-control" disabled="disabled" />
+                            <span asp-validation-for="Car.Color" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-md-12" style="margin-top:15px;">
+                    <div class="form-group col-md-4">
+                        <input type="submit" value="Rezerwuj" class="btn btn-primary" /><br />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            document.getElementById('startDate').min = new Date().toISOString().split("T")[0];
+            document.getElementById('endDate').min = new Date().toISOString().split("T")[0];
+        });
+    </script>
 }

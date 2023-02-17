@@ -1,0 +1,56 @@
+﻿@model CarRental.ViewModels.Order.OrderDataVM
+
+<div class="col-md-12">
+    <div class="row offset-md-2 col-md-8">
+        <div class="row col-md-12 header">
+            <span>Rezerwacje użytkownika: @Model.Name @Model.LastName</span>
+        </div>
+
+        @foreach (var order in Model.Orders)
+        {
+            <div class="car-item row">
+                <div class="col-md-6" style="border-right: 1px solid darkgrey">
+                    <img src="@order.Photo" class="car-photo" />
+                </div>
+                <div class="col-md-6">
+                    <div class="row col-md-12">
+                        <div>
+                            <b>Marka:</b> @order.Brand
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <div>
+                            <b>Model:</b> @order.Model
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <div>
+                            <b>Kolor:</b> @order.Color
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <div>
+                            <b>Łączna kwota:</b> @order.FullPrice zł
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <div>
+                            <b>Od:</b> @order.StartDate.ToString("dd.MM.yyyy")
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <div>
+                            <b>Do:</b> @order.EndDate.ToString("dd.MM.yyyy")
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:15px;">
+                        <div class="col-md-3">
+                            @Html.ActionLink("Usuń","Delete","Order",new { id = order.OrderId },new { @class = "btn btn-danger", @type = "button"})
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        }
+    </div>
+</div>

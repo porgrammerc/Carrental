@@ -18,7 +18,7 @@ namespace CarRental.Services
             var order = new Order
             {
                 UserId = userId,
-                CarId = model.CarId,
+                CarId = model.Car.Id,
                 StartDate = model.StartDate,
                 EndDate = model.EndDate
             };
@@ -28,7 +28,7 @@ namespace CarRental.Services
 
         public IEnumerable<OrderVM> GetOrdersByCar(Guid id)
         {
-            var orders = _orderRepository.GetOrdersByCar(id);
+            var orders = _orderRepository.GetOrdersByCar(id).ToList();
             foreach(var order in orders)
             {
                 yield return new OrderVM()
@@ -41,9 +41,38 @@ namespace CarRental.Services
             }
              
         }
+
+        public IEnumerable<ReservedPeriod> GetReservedDates(Guid carId)
+        {
+            var reservedDates = new List<ReservedPeriod>();
+            var orders = _orderRepository.GetOrdersByCar(carId);
+            foreach(var order in orders)
+            {
+                reservedDates.Add(new ReservedPeriod { StartDate = order.StartDate, EndDate = order.EndDate });
+            }
+
+            return reservedDates;
+        }
         public IEnumerable<UserOrderVM> GetUserOrders(Guid id)
         {
-            throw new NotImplementedException();
+            var orders = _orderRepository.GetOrdersByUser(id).ToList();
+            return orders.Select(x => new UserOrderVM
+            {
+                OrderId = x.Id,
+                Brand = x.Car.Brand,
+                Model = x.Car.Model,
+                Price = x.Car.Price,
+                Photo = x.Car.Photo,
+                Color = x.Car.Color,
+                StartDate = x.StartDate,
+                EndDate = x.EndDate,
+                FullPrice = ((x.EndDate - x.StartDate).TotalDays + 1) * x.Car.Price
+            });
+        }
+
+        public Guid DeleteOrder(Guid id)
+        {
+            return _orderRepository.DeleteOrder(id);
         }
     }
 }

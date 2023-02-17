@@ -44,47 +44,53 @@
                 </div>
             </div>
         </div>
-        @if (User.IsInRole(nameof(Role.Admin)))
-        {
-            <div class="row col-md-12" style="margin-top:15px;">
-                <div class="col-md-4">
+        <div class="row" style="margin-top:15px;">
+            <div class="col-md-12">
+                @if (User.IsInRole(nameof(Role.Admin)))
+                {
                     @Html.ActionLink("Usuń","Delete","Car",new { id = Model.Id },new { @class = "btn btn-danger", @type = "button"})
                     @Html.ActionLink("Edytuj","Update","Car",new { id = Model.Id },new { @class = "btn btn-primary", @type = "button"})
-                </div>
-            </div>
-        }
-        <div class="row" style="margin-top:15px;">
-            <div class="row col-md-12 header">
-                <span>Wypożyczenia</span>
-            </div>
-            <div class="row col-md-12">
-                @if (Model.Orders != null && Model.Orders.Count() > 0)
+                }
+                @if (SignInManager.IsSignedIn(User))
                 {
-                    foreach (var order in Model.Orders)
+                    @Html.ActionLink("Rezerwuj","Create","Order",new { id = Model.Id },new { @class = "btn btn-warning", @type = "button"})
+                }
+            </div>
+
+            <div class="row col-md-12" style="margin-top:15px;">
+                <div class="row col-md-12 header">
+                    <span>Wypożyczenia</span>
+                </div>
+                <div class="row col-md-12 order-row">
+                    @if (Model.Orders != null && Model.Orders.Count() > 0)
                     {
-                        <div class="col-md-12">
-                            <div class="col-md-3">
-                                <span>@order.Name</span>
+                        foreach (var order in Model.Orders)
+                        {
+                            <div class="row car-order">
+                                <div class="col-md-3">
+                                    <span>@order.Name</span>
+                                </div>
+                                <div class="col-md-3">
+                                    <span>@order.LastName</span>
+                                </div>
+                                <div class="col-md-3">
+                                    <span>@order.StartDate.ToString("dd/MM/yyyy")</span>
+                                </div>
+                                <div class="col-md-3">
+                                    <span>@order.EndDate.ToString("dd/MM/yyyy")</span>
+                                </div>
                             </div>
-                            <div class="col-md-3">
-                                <span>@order.LastName</span>
-                            </div>
-                            <div class="col-md-3">
-                                <span>@order.StartDate.ToString("dd/MM/yyyy")</span>
-                            </div>
-                            <div class="col-md-3">
-                                <span>@order.EndDate.ToString("dd/MM/yyyy")</span>
-                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div style="text-align: center">
+                            Brak wypożyczeń
                         </div>
                     }
-                }
-                else
-                {
-                    <div style="text-align: center">
-                        Brak wypożyczeń
-                    </div>
-                }
+                </div>
             </div>
         </div>
+        
     </div>
 </div>

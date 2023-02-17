@@ -99,3 +99,16 @@ a:active {
     text-decoration: none;
     color: black;
 }
+
+.car-order {
+    border-radius: 10px;
+    border: 1px solid darkgrey;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.order-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

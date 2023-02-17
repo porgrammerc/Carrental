@@ -87,10 +87,17 @@ namespace CarRental.Controllers
             return View(login);
         }
 
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize(Roles = $"{nameof(Role.Admin)}")]
+        public IActionResult GetUsers()
+        {
+            return View(_userManager.Users.ToList());
         }
     }
 }
